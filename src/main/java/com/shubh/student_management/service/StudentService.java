@@ -6,4 +6,6 @@ import com.shubh.student_management.entity.Student;
 
 public interface StudentService {
     List<Student> getAllStudents();
+
+    Student addStudent(Student newStudent);
 }
