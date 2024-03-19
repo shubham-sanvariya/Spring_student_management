@@ -2,7 +2,11 @@ package com.shubh.student_management.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shubh.student_management.entity.Student;
@@ -18,7 +22,18 @@ public class StudentController {
     }
 
     @GetMapping("/students")
-    public List<Student> getAllStudents(){
-        return studentService.getAllStudents();
+    public ResponseEntity<List<Student>> getAllStudents(){
+        return ResponseEntity.ok().body(studentService.getAllStudents());
+    }
+
+    @PostMapping("/add-student")
+    public ResponseEntity<Student> addStudent(@RequestBody Student newStudent){
+        String name = newStudent.getLastName();
+        System.out.println(name);
+        Student student = new Student(newStudent.getFirstName(),
+        newStudent.getLastName(),
+        newStudent.getEmail());
+        
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addStudent(student));
     }
 }
