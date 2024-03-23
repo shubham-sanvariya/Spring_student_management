@@ -23,5 +23,10 @@ public class StudentServiceImpl implements StudentService{
     public Student addStudent(Student newStudent) {
         return studentRepository.save(newStudent);
     }
+
+    public void deleteStudent(Long studentId) {
+
+        studentRepository.deleteById(studentId);
+    }
     
 }
