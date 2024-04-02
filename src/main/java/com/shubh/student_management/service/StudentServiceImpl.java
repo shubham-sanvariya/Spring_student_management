@@ -28,5 +28,15 @@ public class StudentServiceImpl implements StudentService{
 
         studentRepository.deleteById(studentId);
     }
-    
+
+    public Student updatedStudent(Long StudentId,Student updatedStudent) {
+        Student student = studentRepository.findById(StudentId)
+        .orElseThrow(() -> new RuntimeException("no student found by this Id"));
+
+        student.setFirstName(updatedStudent.getFirstName());
+        student.setLastName(updatedStudent.getLastName());
+        student.setEmail(updatedStudent.getEmail());
+
+        return studentRepository.save(student);
+    }
 }
